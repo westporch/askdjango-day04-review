@@ -73,6 +73,7 @@ class Post(models.Model):
 	updated_at = models.DateTimeField(auto_now=True) # auto_now=True는 글의 '갱신 시각'을 django가 자동으로 저장한다.
 
 	def __str__(self):
-		'''오버라이딩을 안하면 관리자 페이지에서 Post object라고만 출력된다.
+		'''오버라이딩을 안하면 관리자 페이지(http://192.168.0.17:8888/admin/blog/post/)에서 POST항목이 Post object라고만 출력된다.
+		포스트들의 제목을 출력하기 위해서 아래와 같이 설정한다.
 		'''
 		return self.title
