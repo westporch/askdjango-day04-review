@@ -62,6 +62,7 @@ class Post(models.Model):
 	* sqlite 브라우저 다운 -> http://sqlitebrowser.org/
 	'''
 
+	author = models.CharField(max_length=20)
 	title = models.CharField(max_length=100)
 	'''
 	CharField는 길이 제한이 있는 문자열이다.
@@ -70,3 +71,8 @@ class Post(models.Model):
 	content = models.TextField() # TextField는 길이 제한이 없는 문자열이다.
 	created_at = models.DateTimeField(auto_now_add=True) # auto_now_add=True는 글을 포스팅할 때 '생성 시각'을 django가 자동으로 저장한다.
 	updated_at = models.DateTimeField(auto_now=True) # auto_now=True는 글의 '갱신 시각'을 django가 자동으로 저장한다.
+
+	def __str__(self):
+		'''오버라이딩을 안하면 관리자 페이지에서 Post object라고만 출력된다.
+		'''
+		return self.title
