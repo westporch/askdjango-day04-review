@@ -18,7 +18,6 @@ class Post(models.Model):
 	* title 필드의 이름을 다른 이름(title -> name)으로 변경했다면, 날리고 다시 만들거나 작업지시서에서 이름을 다시 변경(title -> name)한다.
 	* 작업지시서가 제대로 만들어졌는지 확인이 필요하다.
 
-
 	3. blog/migrations/0001_initial.py 파일(작업 지시서) 확인 
 	view blog/migrations/0001_initial.py
 	* 0001_initial.py 파일이 작업 지시서이다. 이 파일을 열어보면 내역을 확인할 수 있다.
@@ -33,6 +32,27 @@ class Post(models.Model):
 	* python3 manage.py migrate <app-name>
 	* '마이그레이션 파일(작업 지시서)'을 데이터베이스로 생성한다.
 
+	blog/migrations/에 아래와 같은 파일들이 있다고 가정.
+
+	0001_initial.py
+	0002_blahblah.py 
+	0003_blahblah.py
+-> 0004_blahblah.py
+	0005_blahblah.py
+	0006_blahblah.py
+   	0007_blahblah.py
+
+	blahblah 항목은 장고가 적절히 판단해서 넣는다. 0005~0007은 DB에 미적용된 상태 (번호는 순차적으로 증가한다.)
+	현재는 0004 위치에 있음.
+
+	python3 manage.py migrate blog 명령을 실행하면 0001_initial.py ~ 004_blahblah.py를 순차적으로 실행한다.
+	현재 위치는 0004임. 0004에서 특정 필드를 지움. 0003으로 간다. 0003으로 가면 데이터 스키마를 복구할 뿐이지 데이터를 복구해주지는 않는다. DB는 항상 보수적으로 관리해야 한다.
+
+	python3 manage.py migrate blog 0003이라고 하면 0004만 취소됨.
+	마지막 마이그레이션이 0003이 되라고 하는 명령.
+	python3 manage.py migrate blog 0002라고 하면 0004, 0003이 취소됨
+	python3 manage.py migrate blog zero라고 하면 모든 작업이 취소된다.
+	
 	6. python3 manage.py showmigrations blog 명령으로 마이그레이션 현황 확인
 	* python3 manage.py showmigrations <app-name>
 	* 엑스표시는 마이그레이션이 적용되었다는 것이다.
