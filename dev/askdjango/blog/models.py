@@ -29,7 +29,8 @@ class Post(models.Model):
 	* 출력된 sql을 DB에서 그대로 실행해도 작동한다.	
 
 	5. python3 manage.py migrate blog 명령으로 DB에 적용
-	* python3 manage.py migrate <app-name>
+	* python3 manage.py migrate <app-name> -> 특정 앱에 대해 마이그레이션을 수행함
+	* python3 manage.py migrate -> 모든 앱에 대해 마이그레이션을 추가함
 	* '마이그레이션 파일(작업 지시서)'을 데이터베이스로 생성한다.
 
 	blog/migrations/에 아래와 같은 파일들이 있다고 가정.
