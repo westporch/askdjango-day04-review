@@ -36,7 +36,7 @@
 
 ## python3 manage.py shell 실행
 
-```python
+```pycon
 (myenv) root@django-review> python3 manage.py shell                                                                     ~/git/askdjango-day04-review/dev/askdjango
 Python 3.5.3 (default, Jan 19 2017, 14:11:04)
 [GCC 6.3.0 20170118] on linux
@@ -47,7 +47,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 모든 포스트 가져오기
 
-```python
+```pycon
 >>> from blog.models import Post
 >>> Post.objects.all()
 <QuerySet [<Post: 볼트, 은퇴무대 마지막 리허설 9초95 우승>, <Post: [사설]남북 군사회담 무산됐지만 포기할 때 아니다>, <Post: [주말흥행기상도] '덩케르크'-'스파이더맨' 쌍끌이 흥행>, <Post: [할리웃POP]'원더우먼2'부터 '배트걸'..DC 신작 8편 전격 공개(공식)>, <Post: [클래식 프리뷰] 서울과 전북, 20일 만에 다시 만난 전설매치>, <Post: PC는 사라질 것인가>, <Post: "비 오면 공기 맑아진다고?" 장마철에도 미세먼지 '나쁨'>, <Post: [ICC 리뷰] '네이마르 멀티골' 바르사, 유벤투스에 2-1 승...2위 등극>, <Post: [날씨] 서울·경기 북부 호우경보...시간당 60mm 폭우>]>
@@ -55,7 +55,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 for문으로 전체 포스트를 가져옴.
 
-```python
+```pycon
 >>> for post in Post.objects.all():
 ...     print(post.id, post.title, post.created_at)
 ...
@@ -72,14 +72,14 @@ for문으로 전체 포스트를 가져옴.
 
 새로운 포스트 작성
 
-```python
+```pycon
 >>> Post.objects.create(author='YTN', title='[날씨] 수도권 강타한 장맛비...청주 폭우보다 강했다', content='이번 비는 시간당 96mm의 물 폭탄을 동반해 지난주 청주를강타했던 폭우보다 더 강했습니다.')
 <Post: [날씨] 수도권 강타한 장맛비...청주 폭우보다 강했다>
 ```
 
 DB에 엑세스하는 시기
 
-```python
+```pycon
 >>> qs = Post.objects.all() --> DB 엑세스가 이루어지지 않아서 데이터를 가져오지 않았음.
 >>> qs --> 이때 DB 엑세스를 수행해서 데이터를 가져온다.
 <QuerySet [<Post: [날씨] 수도권 강타한 장맛비...청주 폭우보다 강했다>, <Post: 볼트, 은퇴무대 마지막 리허설 9초95 우승>, <Post: [사설]남북 군사회담 무산됐지만 포기할 때 아니다>, <Post: [주말흥행기상도] '덩케르크'-'스파이더맨' 쌍끌이 흥행>, <Post: [할리웃POP]'원더우먼2'부터 '배트걸'..DC 신작 8편 전격 공개(공식)>, <Post: [클래식 프리뷰] 서울과 전북, 20일 만에 다시 만난 전설매치>, <Post: PC는 사라질 것인가>, <Post: "비 오면 공기 맑아진다고?" 장마철에도 미세먼지 '나쁨'>, <Post: [ICC 리뷰] '네이마르 멀티골' 바르사, 유벤투스에 2-1 승...2위 등극>, <Post: [날씨] 서울·경기 북부 호우경보...시간당 60mm 폭우>]>
@@ -87,7 +87,7 @@ DB에 엑세스하는 시기
 
 포스트 3개를 가져오기
 
-```python
+```pycon
 >>> Post.objects.all()[:3]
 <QuerySet [<Post: [날씨] 수도권 강타한 장맛비...청주 폭우보다 강했다>, <Post: 볼트, 은퇴무대 마지막 리허설 9초95 우승>, <Post: [사설]남북 군사회담 무산됐지만 포기할 때 아니다>]>
 ```
@@ -95,7 +95,7 @@ DB에 엑세스하는 시기
 쿼리셋을 리스트 혹은 투플로 변환하는 것은 자제해야 함.
 예를 들어 10만개를 리스트를 구성해서 메모리에 올린 후 거기서 3개의 포스트를 가져오면 부하가 크다.
 
-```python
+```pycon
 >>> list(Post.objects.all()[:3])
 [<Post: [날씨] 수도권 강타한 장맛비...청주 폭우보다 강했다>, <Post: 볼트, 은퇴무대 마지막 리허설 9초95 우승>, <Post: [사설]남북 군사회담 무산됐지만 포기할 때 아니다>]
 ```
