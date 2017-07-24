@@ -3,10 +3,11 @@
 <h1>AskDjango</h1>
 <p>안녕하세요. 여러분의 파이썬/장고 페이스메이커가 되겠습니다.</p>
 
-<ul>
+<ul> <!-- ul은 Unordered List의 약자이다. 순서가 필요없는 목록을 생성함. -->
 {% for post in post_list %}
-	<li>
+	<li> <!-- li는 List Item의 약자이다. <ol>과 <ul>의 각 항목들을 나열할 때 <li> 태그를 사용함.-->
 		{{ post.title }}
+	</li>
 {% endfor %}
 </ul>
 
