@@ -12,7 +12,7 @@ render를 import하지 않고 3~4줄로 작성하는 것은 오래된 코드 방
 def post_list(request):
 	#print(request.META['REMOTE_ADDR']) # 웹으로 django 접속시 remote host의 ip를 runserver 콘솔에 출력한다.
 	qs = Post.objects.all()	# 아직 DB에서 데이터를 가져오지 않았음
-	return render(request, 'blog/post_list.html', {'post_list': qs,}) # post_list를 qs에 저장함
+	return render(request, 'blog/post_list.html', {'post_list': qs,}) # post_list를 qs에 저장함, 'post_list'는 템플릿 변수.
 
 def post_list1(request):
 	'FBV: 직접 문자열로 HTML형식 응답하기'
