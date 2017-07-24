@@ -72,6 +72,12 @@ class Post(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True) # auto_now_add=True는 글을 포스팅할 때 '생성 시각'을 django가 자동으로 저장한다.
 	updated_at = models.DateTimeField(auto_now=True) # auto_now=True는 글의 '갱신 시각'을 django가 자동으로 저장한다.
 
+	class Meta: 
+		''' 모델에 메타데이터를 추가할 수 있다.
+		참고: https://docs.djangoproject.com/en/1.11/ref/models/options/#ordering
+		'''
+		ordering = ['-id']	# 역순으로 정렬한다. (최신 포스트를 상단에 배치)
+
 	def __str__(self):
 		'''오버라이딩을 안하면 관리자 페이지(http://192.168.0.17:8888/admin/blog/post/)에서 POST항목이 Post object라고만 출력된다.
 		포스트들의 제목을 출력하기 위해서 아래와 같이 설정한다.
