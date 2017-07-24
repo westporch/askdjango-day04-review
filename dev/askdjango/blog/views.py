@@ -1,3 +1,7 @@
+from django.db.models import Q 
+''' 예를 들어 OR 구문을 포함한 복잡한 쿼리를 실행하고자 할 때 Q object를 사용한다. 
+참고: https://docs.djangoproject.com/en/1.11/topics/db/queries/#complex-lookups-with-q-objects
+'''
 import os
 from .models import Post
 from django.http import HttpResponse, JsonResponse
@@ -16,7 +20,9 @@ def post_list(request):
 	# request.GET['query'] # GET 인자의 query 항목을 가져온다.
 	query = request.GET.get('query', '') # request.GET은 GET 인자(URL에서 물음표 뒤에 있는 부분)를 가져온다, query가 없으면 빈 문자열로 설정한다.
 	if query:	# 만약 쿼리 값이 존재한다면
-		qs = qs.filter(title__icontains=query) # 제목에서 쿼리를 검색한다, __icontains는 대소문자를 구별하지 않는다.
+		#qs = qs.filter(title__icontains=query) # 제목에서 쿼리를 검색한다, __icontains는 대소문자를 구별하지 않는다.
+		condition = Q(title__icontains=query) | Q(content__icontains=query)
+		qs = qs.filter(condition)
 
 	return render(request, 'blog/post_list.html', {'post_list': qs, 'query': query, }) # post_list를 qs에 저장함, 'post_list'는 템플릿 변수.
 
